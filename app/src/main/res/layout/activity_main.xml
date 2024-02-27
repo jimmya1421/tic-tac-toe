@@ -23,7 +23,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="572dp"
+        android:layout_height="472dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,9 @@
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
                 android:contentDescription="i1"
-                android:padding="20sp" />
+                android:onClick="tap"
+                android:padding="20sp"
+                android:tag="1" />
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -62,7 +64,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="i4"
-                android:padding="20sp" />
+                android:onClick="tap"
+                android:padding="20sp"
+                android:tag="4" />
 
             <ImageView
                 android:id="@+id/imageView7"
@@ -71,7 +75,9 @@
                 android:layout_marginBottom="60dp"
                 android:layout_weight="1"
                 android:contentDescription="i7"
-                android:padding="20sp" />
+                android:onClick="tap"
+                android:padding="20sp"
+                android:tag="7" />
 
         </LinearLayout>
 
@@ -88,7 +94,9 @@
                 android:layout_marginTop="60dp"
                 android:layout_weight="1"
                 android:contentDescription="i2"
-                android:padding="20sp" />
+                android:padding="20sp"
+                android:tag="2"
+                android:onClick="tap" />
 
             <ImageView
                 android:id="@+id/imageView5"
@@ -96,7 +104,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="i5"
-                android:padding="20sp" />
+                android:onClick="tap"
+                android:padding="20sp"
+                android:tag="5" />
 
             <ImageView
                 android:id="@+id/imageView8"
@@ -105,7 +115,9 @@
                 android:layout_marginBottom="60dp"
                 android:layout_weight="1"
                 android:contentDescription="i8"
-                android:padding="20sp" />
+                android:onClick="tap"
+                android:padding="20sp"
+                android:tag="8" />
         </LinearLayout>
 
         <LinearLayout
@@ -121,7 +133,9 @@
                 android:layout_marginTop="60dp"
                 android:layout_weight="1"
                 android:contentDescription="i3"
-                android:padding="20sp" />
+                android:onClick="tap"
+                android:padding="20sp"
+                android:tag="3" />
 
             <ImageView
                 android:id="@+id/imageView6"
@@ -129,7 +143,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="i6"
-                android:padding="20sp" />
+                android:onClick="tap"
+                android:padding="20sp"
+                android:tag="6" />
 
             <ImageView
                 android:id="@+id/imageView9"
@@ -138,7 +154,9 @@
                 android:layout_marginBottom="60dp"
                 android:layout_weight="1"
                 android:contentDescription="i9"
-                android:padding="20sp" />
+                android:onClick="tap"
+                android:padding="20sp"
+                android:tag="9" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,9 +11,18 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private LinearLayout textContainer;
+    public int[][] winPos = {
+            {0,1,2},{3,4,5},{6,7,8},  // khade khade
+            {0,3,6},{1,4,7},{2,5,8},   //pade pade
+            {0,4,8},{2,4,6}    // weirdos
+    };
+    public int[] gameState = {
+            2,2,2,   // 0 1 2
+            2,2,2,  //  3 4 5
+            2,2,2};  // 6 7 8
     ImageView[] imageViews = new ImageView[9]; // Or adjust the size as needed
-    public boolean isO = false;
+    public int activeUser = 0;
+    public int gameActive = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,69 +38,54 @@ public class MainActivity extends AppCompatActivity {
         imageViews[7] = findViewById(R.id.imageView8);
         imageViews[8] = findViewById(R.id.imageView9);
 
-        int i=0;
-        for ( i = 0; i < imageViews.length; i++) {
 
-            ImageView myImageView = imageViews[i];
-            imageViews[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // Handle click events here
-                    if (isO != true){
-                    myImageView.setImageResource(R.drawable.o);
-                    isO = true;
-                    myImageView.setContentDescription("o");
-                    }else {myImageView.setImageResource(R.drawable.x);isO = false;
-                    myImageView.setContentDescription("x");
-                    }
-                  String ans =   checkWinner();
-                    if (ans =="WE have a winner")
-                    {
-                       
-                    }
-                }
-            });
-        }
 
      }
-    public String checkWinner(){
-        String[] gp = new String[9];
-        for (int i =0;i<gp.length;i++)
-        {
-
-            gp[i] = (String) imageViews[i].getContentDescription();
+    public void tap(View view){
+        ImageView im = (ImageView) view;
+        int tag = Integer.parseInt(im.getTag().toString());
+        if (gameState[tag-1] == 2){
+            if(activeUser == 0){
+                gameState[tag-1] = 0;
+                activeUser = 1;
+                im.setImageResource(R.drawable.o);
+            }else{
+                gameState[tag-1]= 1;
+                im.setImageResource(R.drawable.x);
+                activeUser = 0;
+            }
         }
-        boolean resetGame = false;
-        if (gp[0] == gp[1] &&gp[1]==gp[2] && gp[0] ==gp[2] ){
-            resetGame = true;
-
-        } else if (gp[3] == gp[4] && gp[4]==gp[5] && gp[3] == gp[5]) {
-            resetGame = true;
-
-        }else if(gp[6] == gp[7] &&gp[7]==gp[8] && gp[8] ==gp[6]){
-            resetGame = true;
-
-        }
-        if (gp[0] == gp[8] && gp[0] == gp[4]){
-            resetGame = true;
+      String winn = checkWin();
+        if (winn != ""){
+        Toast.makeText(this, winn, Toast.LENGTH_SHORT).show();
 
         }
+    }
+    public String checkWin(){
+        String winner ="";
+        for (int[] win:winPos){
+            if (gameState[win[0]] == gameState[win[1]] &&
+                    gameState[win[1]] == gameState[win[2]] &&
+                    gameState[win[0]] !=2){
 
-        if (gp[2] == gp[6] && gp[0] ==gp[4]){
-            resetGame = true;
+                if (gameState[win[0]] ==1){
+                    winner = "won x" ;
 
+                }else{
+                    winner = " y has won ;";
+                }
+            gameReset();
+            }
         }
-        if (resetGame){
-             for ( int j = 0;j < imageViews.length;j++) {
-                            ImageView myImageView = imageViews[j];
-                            myImageView.setImageResource(R.drawable.ic_launcher_background);
-                            myImageView.setContentDescription("i + " + j);
-             }
-             return "WE have a winner";
-
+        return winner;
+    }
+    public void gameReset(){
+        for (int i = 0; i < gameState.length; i++) {
+            gameState[i] = 2;
         }
-
-        return "keep playing";
+        for (int i =0;i<gameState.length;i++){
+            imageViews[i].setImageResource(0);
+        }
     }
 
 }
